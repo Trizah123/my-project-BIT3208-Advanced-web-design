@@ -1,0 +1,3 @@
+// Week 1 – main.js
+// No logic yet. Console log confirms JS is linked correctly.
+console.log("MediStore JS loaded successfully.");

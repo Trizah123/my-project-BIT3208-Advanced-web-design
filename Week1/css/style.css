@@ -1,0 +1,83 @@
+/* ── Reset & base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #F4F6F8;
+  color: #1A1A2E;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Card container ── */
+.container {
+  background: #FFFFFF;
+  border-top: 6px solid #0A7E8C;
+  border-radius: 12px;
+  padding: 60px 48px;
+  text-align: center;
+  max-width: 480px;
+  width: 90%;
+  box-shadow: 0 4px 24px rgba(10, 126, 140, 0.10);
+}
+
+/* ── Logo row ── */
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.cross {
+  font-size: 2.2rem;
+  color: #0A7E8C;
+  line-height: 1;
+}
+
+h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #0A7E8C;
+  letter-spacing: -0.5px;
+}
+
+/* ── Tagline ── */
+.tagline {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 28px;
+}
+
+/* ── Badge ── */
+.badge {
+  display: inline-block;
+  background: #0A7E8C;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 6px 20px;
+  border-radius: 20px;
+  margin-bottom: 32px;
+}
+
+/* ── Author / course info ── */
+.author {
+  font-size: 0.95rem;
+  color: #1A1A2E;
+  margin-bottom: 6px;
+}
+
+.course {
+  font-size: 0.85rem;
+  color: #888;
+}

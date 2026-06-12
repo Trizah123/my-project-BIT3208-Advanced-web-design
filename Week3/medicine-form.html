@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Medicine</title>
+    <style>
+        body { font-family: Arial; background: #F4F6F8; padding: 20px; }
+        .form-card { background: white; padding: 30px; border-radius: 12px; max-width: 500px; margin: 0 auto; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; }
+        .error { color: red; font-size: 12px; }
+        .success { background: green; color: white; padding: 10px; border-radius: 8px; margin-top: 15px; text-align: center; }
+        table { width: 100%; background: white; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #0A7E8C; color: white; }
+        .btn-danger { background: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; }
+        button { background: #0A7E8C; color: white; padding: 12px; width: 100%; border: none; cursor: pointer; border-radius: 8px; }
+    </style>
+</head>
+<body>
+
+<h1 style="text-align:center;">Add Medicine</h1>
+
+<div class="form-card">
+    <form id="medicineForm">
+        <div class="form-group">
+            <label>Medicine Name</label>
+            <input type="text" id="name">
+            <div class="error" id="nameError"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Category</label>
+            <select id="category">
+                <option value="">Select</option>
+                <option>Tablet</option>
+                <option>Syrup</option>
+                <option>Capsule</option>
+            </select>
+            <div class="error" id="categoryError"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Quantity</label>
+            <input type="number" id="quantity">
+            <div class="error" id="quantityError"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Price ($)</label>
+            <input type="number" step="0.01" id="price">
+            <div class="error" id="priceError"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Expiry Date</label>
+            <input type="date" id="expiry">
+            <div class="error" id="expiryError"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Supplier</label>
+            <input type="text" id="supplier">
+            <div class="error" id="supplierError"></div>
+        </div>
+
+        <button type="button" onclick="addMedicine()">Add Medicine</button>
+        <div id="successMsg" class="success" style="display:none;"></div>
+    </form>
+</div>
+
+<h2>Medicine List</h2>
+<table>
+    <thead>
+        <tr><th>Name</th><th>Qty</th><th>Price</th><th>Action</th></tr>
+    </thead>
+    <tbody id="medicineTable"></tbody>
+</table>
+
+<script>
+    let medicines = [];
+
+    function updateTable() {
+        let tbody = document.getElementById('medicineTable');
+        tbody.innerHTML = '';
+        for(let i = 0; i < medicines.length; i++) {
+            let row = tbody.insertRow();
+            row.innerHTML = '<td>' + medicines[i].name + '</td><td>' + medicines[i].qty + '</td><td>$' + medicines[i].price + '</td><td><button onclick="deleteMed(' + i + ')" style="background:#e74c3c;color:white;border:none;padding:5px 10px;">Delete</button></td>';
+        }
+    }
+
+    function deleteMed(index) {
+        medicines.splice(index, 1);
+        updateTable();
+    }
+
+    function addMedicine() {
+        let name = document.getElementById('name').value;
+        let category = document.getElementById('category').value;
+        let quantity = document.getElementById('quantity').value;
+        document.getElementById('price').value;
+        let expiry = document.getElementById('expiry').value;
+        let supplier = document.getElementById('supplier').value;
+        
+        let valid = true;
+        
+        if(name === '') {
+            document.getElementById('nameError').innerHTML = 'Name required';
+            valid = false;
+        } else {
+            document.getElementById('nameError').innerHTML = '';
+        }
+        
+        if(category === '') {
+            document.getElementById('categoryError').innerHTML = 'Select category';
+            valid = false;
+        } else {
+            document.getElementById('categoryError').innerHTML = '';
+        }
+        
+        if(quantity === '' || quantity <= 0) {
+            document.getElementById('quantityError').innerHTML = 'Positive quantity';
+            valid = false;
+        } else {
+            document.getElementById('quantityError').innerHTML = '';
+        }
+        
+        if(price === '' || price <= 0) {
+            document.getElementById('priceError').innerHTML = 'Positive price';
+            valid = false;
+        } else {
+            document.getElementById('priceError').innerHTML = '';
+        }
+        
+        if(expiry === '') {
+            document.getElementById('expiryError').innerHTML = 'Expiry required';
+            valid = false;
+        } else {
+            document.getElementById('expiryError').innerHTML = '';
+        }
+        
+        if(supplier === '') {
+            document.getElementById('supplierError').innerHTML = 'Supplier required';
+            valid = false;
+        } else {
+            document.getElementById('supplierError').innerHTML = '';
+        }
+        
+        if(valid === true) {
+            medicines.push({ name: name, qty: quantity, price: price });
+            updateTable();
+            
+            let msg = document.getElementById('successMsg');
+            msg.innerHTML = '✅ Medicine added successfully!';
+            msg.style.display = 'block';
+            
+            document.getElementById('medicineForm').reset();
+            
+            setTimeout(function() {
+                msg.style.display = 'none';
+            }, 3000);
+        }
+    }
+</script>
+
+</body>
+</html>

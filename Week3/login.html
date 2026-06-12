@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MediStore – Login</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    .login-box {
+      max-width: 420px;
+      margin: 100px auto;
+      background: white;
+      padding: 35px;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    }
+    .strength-bar {
+      height: 8px;
+      border-radius: 4px;
+      margin-top: 6px;
+      transition: all 0.3s;
+      background: #ddd;
+    }
+    .strength-label {
+      font-size: 12px;
+      margin-top: 4px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h1>🏥 MediStore</h1>
+    <h2>Admin Login</h2>
+
+    <form id="loginForm" novalidate>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="admin@medistore.com"/>
+        <span class="error" id="emailError"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter password"/>
+        <div class="strength-bar" id="strengthBar"></div>
+        <div class="strength-label" id="strengthLabel"></div>
+        <span class="error" id="passwordError"></span>
+      </div>
+
+      <button type="submit" class="btn" style="width:100%">Login</button>
+      <div class="success" id="loginSuccess"></div>
+    </form>
+  </div>
+
+  <script>
+    // ── Password Strength Checker ──────────────────────────────
+    document.getElementById('password').addEventListener('input', function() {
+      const val = this.value;
+      const bar = document.getElementById('strengthBar');
+      const label = document.getElementById('strengthLabel');
+
+      const hasUpper   = /[A-Z]/.test(val);
+      const hasNumber  = /[0-9]/.test(val);
+      const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(val);
+
+      if (val.length === 0) {
+        bar.style.width = '0%';
+        bar.style.background = '#ddd';
+        label.textContent = '';
+      } else if (val.length < 6) {
+        bar.style.width = '25%';
+        bar.style.background = 'red';
+        label.style.color = 'red';
+        label.textContent = 'Weak';
+      } else if (val.length <= 8 && !hasSpecial) {
+        bar.style.width = '50%';
+        bar.style.background = 'orange';
+        label.style.color = 'orange';
+        label.textContent = 'Fair';
+      } else if (val.length > 8 && hasNumber && !hasSpecial) {
+        bar.style.width = '75%';
+        bar.style.background = 'goldenrod';
+        label.style.color = 'goldenrod';
+        label.textContent = 'Good';
+      } else if (val.length >= 8 && hasUpper && hasNumber && hasSpecial) {
+        bar.style.width = '100%';
+        bar.style.background = 'green';
+        label.style.color = 'green';
+        label.textContent = 'Strong';
+      }
+    });
+
+    // ── Login Form Validation ──────────────────────────────────
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      let valid = true;
+
+      document.getElementById('emailError').textContent = '';
+      document.getElementById('passwordError').textContent = '';
+      document.getElementById('loginSuccess').textContent = '';
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (email === '') {
+        document.getElementById('emailError').textContent = 'Email is required.';
+        valid = false;
+      } else if (!/\S+@\S+\.\S+/.test(email)) {
+        document.getElementById('emailError').textContent = 'Enter a valid email.';
+        valid = false;
+      }
+
+      if (password === '') {
+        document.getElementById('passwordError').textContent = 'Password is required.';
+        valid = false;
+      } else if (password.length < 6) {
+        document.getElementById('passwordError').textContent = 'Password too short.';
+        valid = false;
+      }
+
+      if (valid) {
+        document.getElementById('loginSuccess').textContent = '✅ Login successful! (Frontend only)';
+      }
+    });
+  </script>
+</body>
+</html>

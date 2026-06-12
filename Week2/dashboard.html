@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MediStore - Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>🏥 MediStore</h2>
+            <a href="#">📊 Dashboard</a>
+            <a href="#">💊 Medicines</a>
+            <a href="#">🏭 Suppliers</a>
+            <a href="#">💰 Sales</a>
+            <a href="#">🚪 Logout</a>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1>Dashboard</h1>
+            <p>Welcome, Admin</p>
+            
+            <!-- Stats Cards -->
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>Total Medicines</h3>
+                    <div class="stat-number">156</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Low Stock</h3>
+                    <div class="stat-number">8</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Suppliers</h3>
+                    <div class="stat-number">12</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Today's Sales</h3>
+                    <div class="stat-number">$2,450</div>
+                </div>
+            </div>
+            
+            <!-- Medicine Table -->
+            <h2>Recent Medicines</h2>
+            <table>
+                <thead>
+                    <tr><th>Name</th><th>Qty</th><th>Price</th><th>Expiry</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Paracetamol</td><td>150</td><td>$2.50</td><td>2025-12-31</td></tr>
+                    <tr><td>Amoxicillin</td><td>75</td><td>$5.00</td><td>2025-08-15</td></tr>
+                    <tr><td>Vitamin C</td><td>30</td><td>$8.00</td><td>2026-01-20</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
